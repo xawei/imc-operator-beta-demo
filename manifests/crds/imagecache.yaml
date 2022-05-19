@@ -1,0 +1,98 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.8.0
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apiextensions.k8s.io/v1","kind":"CustomResourceDefinition","metadata":{"annotations":{"controller-gen.kubebuilder.io/version":"v0.8.0"},"creationTimestamp":null,"name":"imagecaches.eks.cloud.tencent.com"},"spec":{"group":"eks.cloud.tencent.com","names":{"kind":"ImageCache","listKind":"ImageCacheList","plural":"imagecaches","shortNames":["imc"],"singular":"imagecache"},"scope":"Cluster","versions":[{"additionalPrinterColumns":[{"jsonPath":".spec.imageCacheSize","name":"CacheSize","type":"integer"},{"jsonPath":".status.imcId","name":"ImcId","type":"string"},{"jsonPath":".status.imcPhase","name":"Phase","type":"string"},{"jsonPath":".metadata.creationTimestamp","name":"Age","type":"date"}],"name":"v1","schema":{"openAPIV3Schema":{"description":"ImageCache is the Schema for the imagecaches API","properties":{"apiVersion":{"description":"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources","type":"string"},"kind":{"description":"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds","type":"string"},"metadata":{"type":"object"},"spec":{"description":"ImageCacheSpec defines the desired state of ImageCache","properties":{"imageCacheSize":{"default":20,"description":"Default to 1. Minimum value is 1.","format":"int32","minimum":20,"type":"integer"},"imagePullSecrets":{"items":{"type":"string"},"type":"array"},"images":{"items":{"type":"string"},"minItems":1,"type":"array"},"retentionDays":{"default":0,"format":"int32","maximum":3650,"minimum":0,"type":"integer"},"securityGroupIds":{"items":{"type":"string"},"type":"array"}},"required":["images"],"type":"object"},"status":{"description":"ImageCacheStatus defines the observed state of ImageCache","properties":{"imcId":{"type":"string"},"imcPhase":{"type":"string"},"snapshotId":{"type":"string"}},"type":"object"}},"type":"object"}},"served":true,"storage":true,"subresources":{"status":{}}}]},"status":{"acceptedNames":{"kind":"","plural":""},"conditions":[],"storedVersions":[]}}
+  generation: 1
+  name: imagecaches.eks.cloud.tencent.com
+spec:
+  conversion:
+    strategy: None
+  group: eks.cloud.tencent.com
+  names:
+    kind: ImageCache
+    listKind: ImageCacheList
+    plural: imagecaches
+    shortNames:
+      - imc
+    singular: imagecache
+  scope: Cluster
+  versions:
+    - additionalPrinterColumns:
+        - jsonPath: .spec.imageCacheSize
+          name: CacheSize
+          type: integer
+        - jsonPath: .status.imcId
+          name: ImcId
+          type: string
+        - jsonPath: .status.imcPhase
+          name: Phase
+          type: string
+        - jsonPath: .metadata.creationTimestamp
+          name: Age
+          type: date
+      name: v1
+      schema:
+        openAPIV3Schema:
+          description: ImageCache is the Schema for the imagecaches API
+          properties:
+            apiVersion:
+              description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+              type: string
+            kind:
+              description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+              type: string
+            metadata:
+              type: object
+            spec:
+              description: ImageCacheSpec defines the desired state of ImageCache
+              properties:
+                imageCacheSize:
+                  default: 20
+                  description: Default to 1. Minimum value is 1.
+                  format: int32
+                  minimum: 20
+                  type: integer
+                imagePullSecrets:
+                  items:
+                    type: string
+                  type: array
+                images:
+                  items:
+                    type: string
+                  minItems: 1
+                  type: array
+                retentionDays:
+                  default: 0
+                  format: int32
+                  maximum: 3650
+                  minimum: 0
+                  type: integer
+                securityGroupIds:
+                  items:
+                    type: string
+                  type: array
+              required:
+                - images
+              type: object
+            status:
+              description: ImageCacheStatus defines the observed state of ImageCache
+              properties:
+                imcId:
+                  type: string
+                imcPhase:
+                  type: string
+                snapshotId:
+                  type: string
+              type: object
+          type: object
+      served: true
+      storage: true
+      subresources:
+        status: {}

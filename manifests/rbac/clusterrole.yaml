@@ -1,0 +1,51 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: imc-operator-manager-role
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - eks.cloud.tencent.com
+    resources:
+      - imagecaches
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - eks.cloud.tencent.com
+    resources:
+      - imagecaches/finalizers
+    verbs:
+      - update
+  - apiGroups:
+      - eks.cloud.tencent.com
+    resources:
+      - imagecaches/status
+    verbs:
+      - get
+      - patch
+      - update

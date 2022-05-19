@@ -1,0 +1,11 @@
+apiVersion: eks.cloud.tencent.com/v1
+kind: ImageCache
+metadata:
+  annotations:
+    "eks.tke.cloud.tencent.com/eip-attributes": '{"InternetMaxBandwidthOut":2}' # 自动创建eip
+  name: imagecache-sample-more-para
+spec:
+  images:
+    - nginx:v222
+  imageCacheSize: 30
+  retentionDays: 7
